@@ -18,6 +18,7 @@ fn main() {
 
     for t in threads {
         t.join().unwrap();
+        // let _ = t.join();
     }
 }
 
