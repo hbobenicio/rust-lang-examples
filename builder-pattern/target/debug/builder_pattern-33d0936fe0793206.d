@@ -1,0 +1,1 @@
+/home/hugo/projetos/rust-lang-examples/builder-pattern/target/debug/builder_pattern-33d0936fe0793206: /home/hugo/projetos/rust-lang-examples/builder-pattern/src/lib.rs /home/hugo/projetos/rust-lang-examples/builder-pattern/src/main.rs /home/hugo/projetos/rust-lang-examples/builder-pattern/src/hero.rs
