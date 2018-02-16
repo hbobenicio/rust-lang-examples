@@ -1,8 +1,12 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 
+mod math;
+
 use std::fs::File;
 use std::io::ErrorKind;
+use std::error;
+use std::fmt;
 
 // Unrecoverable Errors: The panic! macro
 
@@ -57,7 +61,29 @@ fn fail_from_file3() {
     let file = File::open(filename).expect("Failed to open file");
 }
 
+#[derive(Debug, Clone)]
+struct ArithmeticError;
+impl fmt::Display for ArithmeticError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Cannot divide by zero")
+    }
+}
+impl error::Error for ArithmeticError {
+    fn description(&self) -> &str {
+        "Cannot divide by zero"
+    }
+}
+fn divide(x: i32, y: i32) -> Result<f32, ArithmeticError> {
+    if y == 0 {
+        Err(ArithmeticError)
+    } else {
+        Ok((x/y) as f32)
+    }
+}
+
 // TODO Add a '?' macro example
+
+
 
 fn main() {
     println!("Error Handling Example");
@@ -77,5 +103,6 @@ fn main() {
     // third_party_panic();
     // fail_from_file();
     // fail_from_file2();
-    fail_from_file3();
+    // fail_from_file3();
+    println!("{:?}", divide(5, 3).unwrap());
 }
