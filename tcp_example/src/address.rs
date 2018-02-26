@@ -4,11 +4,22 @@ pub struct Address {
 }
 
 impl Address {
-    pub fn new<Str>(ip: Str, port: Str) -> Address where Str: Into<String> {
+
+    pub fn new() -> Address {
         Address {
-            ip: ip.into(),
-            port: port.into()
+            ip: String::new(),
+            port: String::new()
         }
+    }
+
+    pub fn ip<Str>(mut self, ip: Str) -> Address where Str: Into<String> {
+        self.ip = ip.into();
+        self
+    }
+
+    pub fn port<Str>(mut self, port: Str) -> Address where Str: Into<String> {
+        self.port = port.into();
+        self
     }
 }
 

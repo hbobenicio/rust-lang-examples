@@ -15,7 +15,9 @@ fn serve(listener: &TcpListener) {
 }
 
 fn main() {
-    let server_addr = Address::new("127.0.0.1", "8082");
+    let server_addr = Address::new()
+        .ip("127.0.0.1")
+        .port("8082");
 
     let listener = TcpListener::bind(server_addr.to_string())
         .expect("Servidor escutando conexões na porta 8082");
