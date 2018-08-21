@@ -11,9 +11,9 @@ pub enum Direction {
 pub fn from_keycode(keycode: Keycode) -> Direction {
     match keycode {
         Keycode::Up => Direction::Up,
-        Keycode::Down => Direction::Up,
-        Keycode::Left => Direction::Right,
-        Keycode::Right => Direction::Left,
+        Keycode::Down => Direction::Down,
+        Keycode::Left => Direction::Left,
+        Keycode::Right => Direction::Right,
         _ => panic!("Can't get direction from keycode {}", keycode)
     }
 }

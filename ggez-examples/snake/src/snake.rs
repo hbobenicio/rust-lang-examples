@@ -5,14 +5,18 @@ use direction::{self, Direction};
 
 pub struct Snake {
     pub head: Rect,
-    pub direction: Direction
+    pub body: Vec<Rect>,
+    pub direction: Direction,
+    pub velocity: f32
 }
 
 impl Snake {
-    pub fn new(initial_pos: Rect) -> Self {
+    pub fn new(initial_pos: Rect, velocity: f32) -> Self {
         Snake {
             head: initial_pos,
-            direction: Direction::Right
+            body: vec![],
+            direction: Direction::Right,
+            velocity
         }
     }
 
@@ -24,10 +28,10 @@ impl Snake {
 
     pub fn update(&mut self) {
         match self.direction {
-            Direction::Up => self.head.y += 0.1,
-            Direction::Down => self.head.y += 0.1,
-            Direction::Left => self.head.x -= 0.1,
-            Direction::Right => self.head.x += 0.1
+            Direction::Up => self.head.y -= self.velocity,
+            Direction::Down => self.head.y += self.velocity,
+            Direction::Left => self.head.x -= self.velocity,
+            Direction::Right => self.head.x += self.velocity
         }
     }
 
