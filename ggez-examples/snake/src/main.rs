@@ -46,8 +46,10 @@ impl ggez::event::EventHandler for Game {
             event::Keycode::Up | 
             event::Keycode::Down |
             event::Keycode::Left |
-            event::Keycode::Right =>
-                self.snake.change_direction(direction::from_keycode(keycode)),
+            event::Keycode::Right => {
+                let new_direction = direction::Direction::from(keycode);
+                self.snake.change_direction(new_direction);
+            },
             _ => {},
         }
     }
