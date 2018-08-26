@@ -1,6 +1,7 @@
 extern crate ggez;
 
 mod direction;
+mod segment;
 mod snake;
 
 use ggez::GameResult;
@@ -16,8 +17,8 @@ pub struct Game {
 impl Game {
     pub fn new() -> Game {
         let velocity = 1.0;
-        let initial_pos = graphics::Rect::new(10.0, 10.0, 25.0, 25.0);
-        let snake = Snake::new(initial_pos, velocity);
+        let initial_pos = graphics::Point2::new(50.0, 50.0);
+        let snake = Snake::new(initial_pos, velocity, graphics::Color::from_rgb(0, 255, 0));
 
         Game {
             snake
@@ -34,7 +35,6 @@ impl ggez::event::EventHandler for Game {
     fn draw(&mut self, ctx: &mut Context) -> GameResult<()> {
         graphics::clear(ctx);
 
-        graphics::set_color(ctx, graphics::Color::from_rgb(0, 255, 0))?;
         self.snake.draw(ctx)?;
 
         graphics::present(ctx);
@@ -56,13 +56,15 @@ impl ggez::event::EventHandler for Game {
 }
 
 fn main() {
-    let mut game = Game::new();
-    let conf = ggez::conf::Conf::new();
+    let mut conf = ggez::conf::Conf::new();
+    conf.window_mode = ggez::conf::WindowMode::default().dimensions(400, 300);
+
     let mut ctx = Context::load_from_conf("Snake", "Hugo Benício", conf)
         .expect("Unable to create game context");
 
     graphics::set_background_color(&mut ctx, graphics::BLACK);
 
+    let mut game = Game::new();
     if let Err(e) = event::run(&mut ctx, &mut game) {
         println!("Error: {}", e);
     };
