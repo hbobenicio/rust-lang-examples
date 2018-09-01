@@ -29,6 +29,7 @@ impl Game {
 impl ggez::event::EventHandler for Game {
     fn update(&mut self, _ctx: &mut Context) -> GameResult<()> {
         self.snake.update();
+        
         Ok(())
     }
 
