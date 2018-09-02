@@ -73,14 +73,22 @@ impl Snake {
         match self.direction {
             Direction::Up => {
                 x = head.x;
-                y = head.y - BLOCK_SIZE;
+                y = if head.y - BLOCK_SIZE < 0.0 {
+                    300.0 - BLOCK_SIZE
+                } else {
+                    head.y - BLOCK_SIZE
+                };
             },
             Direction::Down => {
                 x = head.x;
                 y = (head.y + BLOCK_SIZE) % 300.0;
             },
             Direction::Left => {
-                x = head.x - BLOCK_SIZE;
+                x = if head.x - BLOCK_SIZE < 0.0 {
+                    400.0 - BLOCK_SIZE
+                } else {
+                    head.x - BLOCK_SIZE
+                };
                 y = head.y;
             },
             Direction::Right => {
