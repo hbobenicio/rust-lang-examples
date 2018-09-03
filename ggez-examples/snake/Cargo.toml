@@ -5,3 +5,4 @@ authors = ["Hugo Benício <hbobenicio@gmail.com>"]
 
 [dependencies]
 ggez = "0.4"
+rand = "0.5.5"
