@@ -1,0 +1,9 @@
+[package]
+name = "aws-sdk-client-example"
+version = "0.0.1"
+authors = ["Hugo Benicio <hbobenicio@gmail.com>"]
+
+[dependencies]
+rusoto_core = "0.34.0"
+rusoto_credential = "0.13.0"
+rusoto_s3 = "0.34.0"
