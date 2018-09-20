@@ -1,0 +1,10 @@
+[package]
+name = "slap-example"
+version = "0.0.1"
+authors = ["Hugo Benicio <hbobenicio@gmail.com>"]
+
+[dependencies]
+colored = "1.6"
+clap = "2.32"
+log = "0.4.0"
+env_logger = "0.5.13"

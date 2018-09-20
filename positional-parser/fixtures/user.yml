@@ -1,7 +1,7 @@
 fields:
-  age:
-    size: 2
-    type: integer
-  name:
+  - name:
     size: 3
     type: string
+  - age:
+    size: 2
+    type: integer
