@@ -1,0 +1,7 @@
+[package]
+name = "specs-example"
+version = "0.1.0"
+authors = ["Hugo Benicio <hbobenicio@gmail.com>"]
+
+[dependencies]
+specs = "0.12.1"
