@@ -1,0 +1,6 @@
+[package]
+name = "horas_trabalhadas_rs"
+version = "0.1.0"
+authors = ["Hugo Benicio <hbobenicio@gmail.com>"]
+
+[dependencies]
