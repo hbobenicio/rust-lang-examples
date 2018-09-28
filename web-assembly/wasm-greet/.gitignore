@@ -1,0 +1,5 @@
+/target/
+/.vscode/
+/node_modules/
+/dist/
+/src/wasm_greet*

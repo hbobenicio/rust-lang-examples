@@ -1,0 +1,19 @@
+{
+  "name": "wasm-greet",
+  "version": "0.0.1",
+  "description": "This example project is the result of [this](https://hacks.mozilla.org/2018/04/javascript-to-rust-and-back-again-a-wasm-bindgen-tale/) excelent article, by Alex Crichton.",
+  "main": "main.js",
+  "scripts": {
+    "build:webassembly": "./scripts/webassembly-build.sh",
+    "dev": "npm run build:webassembly && webpack-dev-server --mode development",
+    "build": "npm run build:webassembly && webpack --mode production"
+  },
+  "author": "Hugo Benício <hugo.oliveira@serpro.gov.br>",
+  "license": "MIT",
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9"
+  }
+}
