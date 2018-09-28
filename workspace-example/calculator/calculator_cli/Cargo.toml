@@ -1,0 +1,14 @@
+[package]
+name = "calculator_cli"
+version = "0.1.0"
+authors = ["Hugo Benicio <hbobenicio@gmail.com>"]
+edition = "2018"
+
+[[bin]]
+name = "calculator"
+path = "src/main.rs"
+
+[dependencies]
+colored = "1.6"
+clap = "2.32"
+calculator_core = { path = "../calculator_core" }
