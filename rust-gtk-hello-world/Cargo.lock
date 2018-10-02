@@ -247,6 +247,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "rust-gtk-hello-world"
 version = "0.1.0"
 dependencies = [
+ "gdk 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtk 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
