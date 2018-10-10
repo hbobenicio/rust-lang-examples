@@ -7,3 +7,6 @@ authors = ["Hugo Benicio <hbobenicio@gmail.com>"]
 rusoto_core = "0.34.0"
 rusoto_credential = "0.13.0"
 rusoto_s3 = "0.34.0"
+dotenv = "~0.13"
+clap = "~2.32"
+colored = "~1.6"
