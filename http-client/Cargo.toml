@@ -1,0 +1,13 @@
+[package]
+name = "http-client"
+version = "0.1.0"
+authors = ["Hugo Benicio <hbobenicio@gmail.com>"]
+edition = "2018"
+
+[profile.release]
+lto = true
+
+[dependencies]
+reqwest = "0.9"
+hyper = "0.12"
+futures = "0.1"
