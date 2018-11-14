@@ -9,7 +9,7 @@ use hyper::rt::Future;
 /// 
 /// * `links` - The list of links to be checked
 pub fn check_links(links: &Vec<String>) -> Result<(), String> {
-
+    println!("--- hyper (no redirect) ---");
     let mut futures = vec![];
 
     for link in links {
@@ -28,15 +28,17 @@ pub fn check_links(links: &Vec<String>) -> Result<(), String> {
 
     hyper::rt::run(sink);
 
+    println!("");
     Ok(())
 }
 
 fn fetch_link(url: &hyper::Uri) -> impl Future<Item = (), Error = ()> {
     let client = hyper::Client::new();
 
+    let b_url = Box::new(url.clone());
     client.get(url.clone())
-        .map(|resp: hyper::Response<hyper::Body>| {
-            println!("{}", resp.status());
+        .map(move |resp: hyper::Response<hyper::Body>| {
+            println!("{} - {}", b_url, resp.status());
         })
         .map_err(|e: hyper::Error| {
             eprintln!("error {}", e);

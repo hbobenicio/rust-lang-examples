@@ -18,6 +18,11 @@ fn main() {
         failed = true;
     }
 
+    if let Err(e) = example::reqwest::check_links_no_redirect(&links) {
+        eprintln!("reqwest (no redirect) example failed: {}", e);
+        failed = true;
+    }
+
     if let Err(e) = example::reqwest::check_links(&links) {
         eprintln!("reqwest example failed: {}", e);
         failed = true;
