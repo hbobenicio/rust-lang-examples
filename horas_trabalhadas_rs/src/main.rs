@@ -1,7 +1,11 @@
 use std::env;
 use std::num;
 use std::fmt;
+use std::process;
+use std::convert;
+use std::string;
 
+#[derive(Debug, PartialEq, Eq)]
 enum AppError {
     WrongNumberOfArgs(usize),
     ParsingError(String),
@@ -23,13 +27,13 @@ impl fmt::Display for AppError {
 
 type AppResult = Result<f32, AppError>;
 
-impl std::convert::From<std::string::ParseError> for AppError {
-    fn from(other: std::string::ParseError) -> Self {
+impl convert::From<string::ParseError> for AppError {
+    fn from(other: string::ParseError) -> Self {
         AppError::ParsingError(other.to_string())
     }
 }
 
-impl std::convert::From<num::ParseIntError> for AppError {
+impl convert::From<num::ParseIntError> for AppError {
     fn from(other: num::ParseIntError) -> Self {
         AppError::ParsingError(other.to_string())
     }
@@ -47,6 +51,16 @@ fn parse_time(str_time: &str) -> Result<u32, AppError> {
     let parts: Vec<&str> = str_time.split(':').collect();
     let hour: u32 = parts[0].parse()?;
     let min: u32 = parts[1].parse()?;
+
+    if min >= 60 {
+        let error_msg = format!("Minutos devem ser menores que 60");
+        return Err(AppError::ParsingError(error_msg));
+    }
+
+    if hour >= 24 {
+        let error_msg = format!("Horas trabalhadas devem ser menores que 24");
+        return Err(AppError::ParsingError(error_msg));
+    }
 
     Ok(hour * 60 + min)
 }
@@ -87,6 +101,41 @@ fn start() -> AppResult {
 fn main() {
     match start() {
         Ok(total) => println!("Horas trabalhadas: {}h", total),
-        Err(reason) => eprintln!("Error: {}", reason)
+        Err(reason) => {
+            eprintln!("Error: {}", reason);
+            process::exit(1);
+        }
     };
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn parse_time_should_work() {
+
+        assert_eq!(parse_time("00:00"), Ok(0u32));
+        assert_eq!(parse_time("01:30"), Ok(90u32));
+    }
+
+    #[test]
+    fn parse_time_should_fail_with_parsing_error() {
+        let assert_parse_time_parsing_error = |res: Result<u32, AppError>| {
+            match res {
+                Ok(x) => panic!("Wrong format must fail parsing with ParsingError. Got Ok({})", x),
+                Err(e) =>
+                    assert_eq!(
+                        std::mem::discriminant(&e),
+                        std::mem::discriminant(&AppError::ParsingError("".to_string()))
+                    )
+            }
+        };
+
+        assert_parse_time_parsing_error(parse_time("1A:23"));
+        assert_parse_time_parsing_error(parse_time("1234"));
+        assert_parse_time_parsing_error(parse_time("12:345"));
+        assert_parse_time_parsing_error(parse_time("01:75"));
+        assert_parse_time_parsing_error(parse_time("24:30"));
+    }
 }

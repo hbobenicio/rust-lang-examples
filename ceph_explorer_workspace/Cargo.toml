@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+  "ceph_explorer",
+  "ceph_explorer_cli",
+  "ceph_explorer_gui",
+]
