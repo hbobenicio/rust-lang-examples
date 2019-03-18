@@ -1,0 +1,10 @@
+[package]
+name = "hash-performance"
+version = "0.1.0"
+authors = ["Hugo Benicio Miranda de Oliveira <hugo.oliveira@serpro.gov.br>"]
+edition = "2018"
+
+[dependencies]
+flame = "0.2.2"
+fnv = "1.0.6"
+fasthash = "0.4.0"
