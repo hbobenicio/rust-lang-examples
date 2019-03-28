@@ -6,7 +6,7 @@
 /// # Arguments
 /// 
 /// * `links` - The list of links to be checked
-pub fn check_links(links: &Vec<String>) -> Result<(), String> {
+pub fn check_links(links: &[String]) -> Result<(), String> {
     println!("--- reqwest (with redirect) ---");
 
     for link in links {
