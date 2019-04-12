@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Hugo Benicio <hbobenicio@gmail.com>"]
 
 [dependencies]
+prettytable-rs = "^0.8" # >= 0.8.0 < 0.9.0

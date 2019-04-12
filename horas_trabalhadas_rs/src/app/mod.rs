@@ -5,6 +5,8 @@ mod parser;
 use std::io::BufRead;
 use app::error::Error;
 
+use prettytable::{row, cell};
+
 /// Inicia a execução da aplicação
 pub fn run() -> Result<f32, Error> {
     let inp = input::parse()?;
@@ -54,7 +56,11 @@ fn time_range(str_time1: &str, str_time2: &str) -> Result<u32, Error> {
 }
 
 fn process_file(path: String) -> Result<f32, Error> {
+    let mut table = prettytable::Table::new();
+    table.set_titles(row![bFg => "DIA", "HORÁRIOS", "HORAS TRABALHADAS", "APROPRIAÇÃO"]);
+
     let mut total_horas_trabalhadas: f32 = 0.0;
+    
     let file = std::fs::File::open(path)?;
     let reader = std::io::BufReader::new(file);
     for line in reader.lines() {
@@ -66,7 +72,6 @@ fn process_file(path: String) -> Result<f32, Error> {
             Some(r) => r,
             None => continue,
         };
-        // println!("{:?}", record);
 
         if record.times.len() == 2 {
             let h1 = &record.times[0];
@@ -76,7 +81,12 @@ fn process_file(path: String) -> Result<f32, Error> {
             let delta_t = delta_t as f32 / 60.0;
             total_horas_trabalhadas += delta_t;
 
-            println!("dia {}: {}h", record.day, delta_t);
+            table.add_row(row![
+                bFw -> record.day,
+                format!("{} às {}", h1, h2),
+                delta_t,
+                bFw -> format!("{:.1}", delta_t - 0.1)
+            ]);
             
         } else if record.times.len() == 4 {
             let h1 = &record.times[0];
@@ -90,11 +100,18 @@ fn process_file(path: String) -> Result<f32, Error> {
             let total = (delta_t1 + delta_t2) as f32 / 60.0;
             total_horas_trabalhadas += total;
 
-            println!("dia {}: {}h", record.day, total);
+            table.add_row(row![
+                bFw -> record.day,
+                format!("{} às {}, {} às {}", h1, h2, h3, h4),
+                total,
+                bFw -> format!("{:.1}", total - 0.1)
+            ]);
         } else {
-            println!("dia {}: ignorado! {:?}", record.day, record);
+            eprintln!("dia {}: ignorado! {:?}", record.day, record);
         }
     }
+
+    table.printstd();
 
     Ok(total_horas_trabalhadas)
 }
