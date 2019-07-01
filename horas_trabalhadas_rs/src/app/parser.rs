@@ -154,6 +154,20 @@ mod test {
                 input: "                31                                                                                                      0       0".to_string(),
                 expected: Ok(None),
             },
+            TestCase {
+                input: "84		4	07:53	12:41	12:50	12:51	13:56	16:55							-12	0".to_string(),
+                expected: Ok(Some(FileRecord {
+                    day: "4".to_string(),
+                    times: vec!(
+                        "07:53".to_string(),
+                        "12:41".to_string(),
+                        "12:50".to_string(),
+                        "12:51".to_string(),
+                        "13:56".to_string(),
+                        "16:55".to_string(),
+                    )
+                })),
+            }
         ];
 
         for test_case in &test_cases {

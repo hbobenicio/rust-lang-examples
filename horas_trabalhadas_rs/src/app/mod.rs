@@ -73,6 +73,7 @@ fn process_file(path: String) -> Result<f32, Error> {
             None => continue,
         };
 
+        // TODO Melhorar este bloco de código (Match e/ou Loop)
         if record.times.len() == 2 {
             let h1 = &record.times[0];
             let h2 = &record.times[1];
@@ -103,6 +104,27 @@ fn process_file(path: String) -> Result<f32, Error> {
             table.add_row(row![
                 bFw -> record.day,
                 format!("{} às {}, {} às {}", h1, h2, h3, h4),
+                total,
+                bFw -> format!("{:.1}", total - 0.1)
+            ]);
+        } else if record.times.len() == 6 {
+            let h1 = &record.times[0];
+            let h2 = &record.times[1];
+            let h3 = &record.times[2];
+            let h4 = &record.times[3];
+            let h5 = &record.times[4];
+            let h6 = &record.times[5];
+
+            let delta_t1 = time_range(h1, h2)?;
+            let delta_t2 = time_range(h3, h4)?;
+            let delta_t3 = time_range(h5, h6)?;
+
+            let total = (delta_t1 + delta_t2 + delta_t3) as f32 / 60.0;
+            total_horas_trabalhadas += total;
+
+            table.add_row(row![
+                bFw -> record.day,
+                format!("{} às {}, {} às {} e {} às {}", h1, h2, h3, h4, h5, h6),
                 total,
                 bFw -> format!("{:.1}", total - 0.1)
             ]);
