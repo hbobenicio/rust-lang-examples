@@ -1,0 +1,11 @@
+[package]
+name = "config-example"
+version = "0.1.0"
+authors = ["Hugo Benício Miranda de Oliveira"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+envy = "0.4.0"
+serde = { version = "1.0.98", features = ["derive"] }
