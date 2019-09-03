@@ -1,6 +1,0 @@
-[package]
-name = "parsers"
-version = "0.1.0"
-authors = ["Hugo Benício <hbobenicio@gmail.com>"]
-
-[dependencies]
