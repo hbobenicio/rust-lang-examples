@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:12.2
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+    ports:
+      - 5432:5432
+    # volumes:
+    #   - ./migrations:/docker-entrypoint-initdb.d:ro
+      
+  pgadmin:
+    image: dpage/pgadmin4:4.18
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: demo@demo
+      PGADMIN_DEFAULT_PASSWORD: demo
+      GUNICORN_THREADS: 8
+    ports: 
+      - 8081:80
