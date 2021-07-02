@@ -1,8 +1,0 @@
-/target
-/parts
-/prime
-/snap
-/stage
-/*.snap
-/*.deb
-**/*.rs.bk
