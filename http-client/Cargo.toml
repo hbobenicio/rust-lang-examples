@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 reqwest = "0.9"
-hyper = "0.12"
+hyper = "0.14"
 futures = "0.1"
 
 # The core APIs, including the Serialize and Deserialize traits. Always
